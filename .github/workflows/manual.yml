@@ -1,0 +1,36 @@
+name: Upstream sync
+
+
+on:
+  schedule:
+    # cover with my activity hours
+    - cron:  15 8-14/2,18,20,21 * * 1-4
+  workflow_dispatch:
+
+jobs:
+  sync-and-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: checkout
+      uses: action/checkout@v2
+      with:
+        ref: upstream
+      
+    - name: add remote upstream
+      run: git remote -t master upstream git@github.com:exceljs/exceljs.git
+    
+    - name: fetch
+      run: git fetch upstream
+      
+    - name: merge
+      run: git merge upstream/master
+      
+    - name: push
+      run: git push origin upstream
+      
+      ## new nightly version && publish
+      ## git tag and gh release note
+      ## notify affected PRs
+      
+
