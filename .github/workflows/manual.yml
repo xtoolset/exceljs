@@ -18,7 +18,7 @@ jobs:
         ref: upstream
       
     - name: add remote upstream
-      run: git remote -t master upstream git@github.com:exceljs/exceljs.git
+      run: git remote add -t master upstream git@github.com:exceljs/exceljs.git
     
     - name: fetch
       run: git fetch upstream
